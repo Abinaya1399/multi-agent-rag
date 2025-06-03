@@ -11,3 +11,13 @@ def load_pdf_from_url(url):
     for page in reader.pages:
         text += page.extract_text() or ""
     return text
+
+def load_pdf_from_file(file):
+    from pypdf import PdfReader
+    reader = PdfReader(file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text() or ""
+    return text
+
+

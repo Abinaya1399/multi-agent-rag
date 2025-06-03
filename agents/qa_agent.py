@@ -108,27 +108,38 @@ def answer_question(query, context_docs, chat_history):
         context += chunk + "\n\n"
         total_tokens += chunk_tokens
 
-    # Construct messages from chat history
+    # Chat history (only valid strings)
     messages = []
     for turn in chat_history:
-        messages.append(HumanMessage(content=turn["user"]))
-        messages.append(AIMessage(content=turn["assistant"]))
+        user_msg = turn.get("user")
+        assistant_msg = turn.get("assistant")
+        if isinstance(user_msg, str):
+            messages.append(HumanMessage(content=user_msg))
+        if isinstance(assistant_msg, str):
+            messages.append(AIMessage(content=assistant_msg))
 
     prompt = f"Context:\n{context}\n\nQuestion: {query}"
     prompt_tokens = count_tokens(prompt)
 
     if prompt_tokens > MAX_TOKENS:
         raise ValueError(f"Prompt still too large: {prompt_tokens} tokens")
-    
+
     messages.append(HumanMessage(content=prompt))
 
-    # Invoke model with full message history
-    response = llm.invoke(messages)
+    try:
+        response = llm.invoke(messages)
+        response_text = response.content or "⚠️ No answer returned."
+    except Exception as e:
+        response_text = f"⚠️ LLM invocation failed: {str(e)}"
 
-    # Update chat history
-    chat_history.append({"user": query, "assistant": response.content})
+    # Save to history
+    chat_history.append({
+        "user": query,
+        "assistant": response_text
+    })
 
-    return response.content
+    return response_text
+
 
     # return llm.invoke([HumanMessage(content=prompt)]).content
 
