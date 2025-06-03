@@ -1,0 +1,10 @@
+langchain
+chromadb
+langchain-community
+pypdf
+tqdm
+groq
+llama-index
+sentence-transformers
+langchain-huggingface
+langchain-chroma
