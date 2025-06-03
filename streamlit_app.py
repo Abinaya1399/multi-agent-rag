@@ -143,12 +143,30 @@ for turn in st.session_state.chat_history:
         with st.chat_message("assistant"):
             st.markdown(turn["assistant"])
 
-# Reset Chat + PDF button
-if st.button("🔁 Reset Chat & Upload New PDF"):
-    st.session_state.chat_history = []
-    st.session_state.pdf_loaded = False
-    st.session_state.vector_store = get_vector_store()
-    st.rerun()
+# # Reset Chat + PDF button
+# if st.button("🔁 Reset Chat & Upload New PDF"):
+#     st.session_state.chat_history = []
+#     st.session_state.pdf_loaded = False
+#     st.session_state.vector_store = get_vector_store()
+#     st.rerun()
+
+# Divider + bottom buttons
+st.divider()
+col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("🧹 Clear Chat"):
+        st.session_state.chat_history = []
+
+with col2:
+    if st.button("📤 Upload New PDF"):
+        st.session_state.chat_history = []
+        st.session_state.pdf_loaded = False
+        st.session_state.vector_store = get_vector_store()
+        st.session_state.pop("file_uploader_key", None)  # Clear key to reset upload UI
+        st.rerun()
+
+
 
 
 
