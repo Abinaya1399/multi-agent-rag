@@ -1,6 +1,6 @@
 # 🤖  PDF InsightBot - A Multi-Agent RAG Chatbot
 
-This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot built using **LangChain**, **Groq (LLaMA 3)**, **Chroma vector database**, and **HuggingFace sentence-transformers**. It allows you to upload or link a PDF and ask natural language questions about its contents — with multi-turn memory and clean context management.
+This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot built using **LangChain**, **Groq (LLaMA 3)**, **Chroma vector database**, and **HuggingFace sentence-transformers**. It allows you to upload a PDF and ask natural language questions about its contents, with multi-turn memory and clean context management.
 
 ### 🚀 Features
 
@@ -18,7 +18,7 @@ This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot b
 
 ## 🔧 What It Does
 
-- Loads a PDF from a URL
+- Loads the contents of the PDF
 - Splits it into overlapping text chunks
 - Converts each chunk to embeddings using HuggingFace
 - Stores them in Chroma vector store
@@ -37,5 +37,37 @@ This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot b
 - **Tiktoken** – counts tokens to stay within limits
 - **PyPDF** – extracts text from PDF
 - **Streamlit** – simple and reactive front-end UI
+
+## How To Run This Project:
+
+- **Clone the Repository**
+
+  git clone https://github.com/Abinaya1399/multi-agent-rag.git
+
+  cd multi-agent-rag
+
+- **Set Up the Environment**
+
+  conda create -n multiagent python=3.9 -y
+
+  conda activate multiagent
+
+- **Install Dependencies**
+
+  pip install -r requirements.txt
+
+- **Configure Environment Variables**
+
+  export GROQ_API_KEY=your_groq_key
+
+- **Run the App**
+
+  streamlit run streamlit_app.py
+
+- **To Deactivate**
+
+  conda deactivate
+
+
 
 
