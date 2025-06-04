@@ -1,36 +1,41 @@
-# 🤖 Multi-Agent RAG Chatbot (PDF Q&A)
+# 🤖  PDF InsightBot - A Multi-Agent RAG Chatbot
 
-This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot built using **LangChain**, **Groq (LLaMA 3)**, **Chroma vector database**, and **HuggingFace sentence-transformers**. It allows you to upload or link a PDF and ask natural language questions about its contents.
+This project is a multi-agent **Retrieval-Augmented Generation (RAG)** chatbot built using **LangChain**, **Groq (LLaMA 3)**, **Chroma vector database**, and **HuggingFace sentence-transformers**. It allows you to upload or link a PDF and ask natural language questions about its contents — with multi-turn memory and clean context management.
 
 ### 🚀 Features
 
+- 📄 Upload a PDF and start chatting
+- 🧹 Clear chat or fully reset session on new upload
+- 🔁 PDF re-upload creates a clean session (no stale context)
 - 🔍 PDF ingestion and chunking
-- 🧠 Embedding storage in a vector database (Chroma)
-- 🤖 LLM-powered Q&A using Groq's LLaMA3-70B
-- 🧠 Contextual multi-turn conversation
-- ✅ Token-efficient prompt construction
-- 💬 Conversational history memory
+- 🧠 Embedding storage in Chroma vector DB
+- 🤖 LLM-powered answers via Groq LLaMA3-70B
+- 💬 Multi-turn chat with contextual memory
+- ✅ Token-aware prompt construction
+- 🔒 File uploader uses random keys to enforce reset
 
 ---
 
 ## 🔧 What It Does
 
 - Loads a PDF from a URL
-- Splits it into smaller chunks
-- Converts text chunks into vector embeddings
-- Stores them in a vector database (Chroma)
+- Splits it into overlapping text chunks
+- Converts each chunk to embeddings using HuggingFace
+- Stores them in Chroma vector store
 - Uses Groq’s LLaMA 3 model to answer your questions
-- Remembers past questions for context
+- Maintains chat history for context
+- Supports a full reset when a new PDF is uploaded, ensuring no old context is reused
 
 ---
 
 ## 🧰 Tech Used
 
-- **LangChain** – connects everything together
-- **Groq (LLaMA 3)** – large language model for answering
+- **LangChain** – agent orchestration and tool wrapping
+- **Groq (LLaMA 3)** – high-speed LLM for Q&A
 - **ChromaDB** – vector database for storing embeddings
-- **HuggingFace Transformers** – for generating embeddings
+- **HuggingFace sentence-transformers** – for generating semantic embeddings
 - **Tiktoken** – counts tokens to stay within limits
 - **PyPDF** – extracts text from PDF
+- **Streamlit** – simple and reactive front-end UI
 
 
